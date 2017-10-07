@@ -20,19 +20,18 @@ import android.widget.ImageView;
 import android.location.LocationListener;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends AppCompatActivity {
 
 
-    protected LocationManager locationManager;
-    protected LocationListener locationListener;
-    protected Context context;
+    LocationManager locationManager;
+    LocationListener locationListener;
+    Context context;
     TextView txtLat;
-    String lat;
     String provider;
-    protected String latitude, longitude;
-    protected boolean gps_enabled, network_enabled;
+    String latitude, longitude;
+    boolean gps_enabled, network_enabled;
 
-
+    double lon, lat;
     ImageView imageView1;
     ImageView imageView2;
     Bitmap[] bits = {null, null};
@@ -48,21 +47,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         txtLat = (TextView) findViewById(R.id.textView1);
 
-
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                    REQUEST_LOCATION);
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+            return;
+        }
+        try {
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            lon = location.getLongitude();
+            lat = location.getLatitude();
+            System.out.println(lat + ", " + lon);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
 //        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
@@ -83,27 +80,27 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         imageView1.setImageBitmap(bits[0]);
         imageView2.setImageBitmap(bits[1]);
     }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        txtLat = (TextView) findViewById(R.id.textView1);
-        txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        Log.d("Latitude","disable");
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        Log.d("Latitude","enable");
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.d("Latitude","status");
-    }
+//
+//    @Override
+//    public void onLocationChanged(Location location) {
+//        txtLat = (TextView) findViewById(R.id.textView1);
+//        txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+//    }
+//
+//    @Override
+//    public void onProviderDisabled(String provider) {
+//        Log.d("Latitude","disable");
+//    }
+//
+//    @Override
+//    public void onProviderEnabled(String provider) {
+//        Log.d("Latitude","enable");
+//    }
+//
+//    @Override
+//    public void onStatusChanged(String provider, int status, Bundle extras) {
+//        Log.d("Latitude","status");
+//    }
 
 
 
