@@ -24,7 +24,7 @@ public class Issue {
     public Issue() {
         name = "Blank Issue Name";
         score = -1;
-        description = "Please help us FixIt!";
+        description = "Blank Description";
         pic = null;
         lat = 37.8710; //Default Memorial Stadium Lat
         lon = -122.2508; //Default Memorial Stadium Lon
