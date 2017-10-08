@@ -46,8 +46,10 @@ public class IssueFragment extends Fragment {
         mTitle.setText(mIssue.getName());
 
         //Image
-        mImage = (ImageView)v.findViewById(R.id.imageView);
-
+        ImageView mImage = (ImageView)v.findViewById(R.id.imageView);
+        if (mIssue.getPic() != null) {
+            mImage.setImageBitmap(mIssue.getPic());
+        }
         //Description
         mDescription = (TextView)v.findViewById(R.id.descriptionTextView);
         mDescription.setText(mIssue.getDescription());
