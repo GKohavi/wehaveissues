@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -55,9 +56,9 @@ public class IssueListViewFragment extends ListFragment {
             if (convertView == null) {
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_issues,null);
             }
-
-//            Issue anIssue = getItem(position);
+            Issue anIssue = getItem(position);
             Button mTitle = (Button)convertView.findViewById(R.id.issueNameButton);
+            mTitle.setText(anIssue.getName());
             mTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -66,6 +67,10 @@ public class IssueListViewFragment extends ListFragment {
                 }
             });
 
+            ImageView mImage = (ImageView)convertView.findViewById(R.id.listImageView);
+            if (anIssue.getPic() != null) {
+                mImage.setImageBitmap(anIssue.getPic());
+            }
             return convertView;
         }
     }

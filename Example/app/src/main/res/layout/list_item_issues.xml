@@ -11,23 +11,17 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/issueNameButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Issue Name"
-            android:id="@+id/issueNameButton"/>
+            android:layout_height="91dp"
+            android:layout_weight="0.19"
+            android:text="Issue Name" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Score"
-            android:id="@+id/scoreButton"/>
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="177dp"
+            android:layout_height="match_parent"
             app:srcCompat="@android:drawable/ic_input_add"
-            android:id="@+id/imageButton"
-            android:layout_weight="1"/>
+            android:id="@+id/listImageView" />
 
 
     </LinearLayout>

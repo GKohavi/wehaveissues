@@ -19,7 +19,7 @@ public class Issue {
     public Issue() {
         name = "Blank Issue Name";
         score = -1;
-        description = "Blank Description";
+        description = "Please help us FixIt!";
         pic = null;
 
         mId = UUID.randomUUID();

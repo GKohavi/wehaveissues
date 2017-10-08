@@ -1,6 +1,9 @@
 package example.example;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -17,13 +20,24 @@ public class IssueList {
         mIssues = new ArrayList<Issue>();
 
         Issue tempIssue = new Issue();
-        tempIssue.setName("First Issue!");
-        tempIssue.setDescription("Broken light bulb");
+        tempIssue.setName("Raised Sidewalk");
+        tempIssue.setDescription("This raised sidewalk near Memorial Stadium is a hazard to pedestrians - especially those with impairments. Please help us FixIt!");
+        Drawable tempDrawable = appContext.getResources().getDrawable(R.drawable.broken_sidewalk);
+        tempIssue.setPic(((BitmapDrawable) tempDrawable).getBitmap());
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
-        tempIssue.setName("Second Issue!");
-        tempIssue.setDescription("Graffiti");
+        tempIssue.setName("Confusing Parking Signs");
+        tempIssue.setDescription("These parking signs are way too confusing to read and follow. It would be much nicer to have a single sign with clear instructions that we can follow accordingly. Please help us FixIt!");
+        tempDrawable = appContext.getResources().getDrawable(R.drawable.confusing_parking_signs);
+        tempIssue.setPic(((BitmapDrawable) tempDrawable).getBitmap());
+        mIssues.add(tempIssue);
+
+        tempIssue = new Issue();
+        tempIssue.setName("Broken Street Lamps");
+        tempIssue.setDescription("It's too dark on this street and I feel unsafe walking back home after work at night. It would be awesome if the city could help us FixIt!");
+        tempDrawable = appContext.getResources().getDrawable(R.drawable.broken_street_lights);
+        tempIssue.setPic(((BitmapDrawable) tempDrawable).getBitmap());
         mIssues.add(tempIssue);
     }
 
