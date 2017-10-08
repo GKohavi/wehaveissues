@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
 import java.util.UUID;
 
 /**
@@ -22,6 +26,8 @@ public class IssueFragment extends Fragment {
     private TextView mTitle;
     private ImageView mImage;
     private TextView mDescription;
+    private MapView mMap;
+    private GoogleMap gMap;
 
 
     public IssueFragment() {
@@ -53,6 +59,17 @@ public class IssueFragment extends Fragment {
         //Description
         mDescription = (TextView)v.findViewById(R.id.descriptionTextView);
         mDescription.setText(mIssue.getDescription());
+
+        //MapView
+        // Gets the MapView from the XML layout and creates it
+        mMap = (MapView)v.findViewById(R.id.issueMapView);
+        mMap.onCreate(savedInstanceState);
+
+        // Gets to GoogleMap from the MapView and does initialization stuff
+        //gMap = ;
+
+        //gMap.getUiSettings().setMyLocationButtonEnabled(false);
+        //gMap.setMyLocationEnabled(true);
 
         return v;
     }

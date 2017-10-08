@@ -2,6 +2,8 @@ package example.example;
 
 import android.graphics.Bitmap;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.UUID;
 
 /**
@@ -13,6 +15,9 @@ public class Issue {
     private int score;
     private String description;
     private Bitmap pic;
+    private double lat;
+    private double lon;
+    private GoogleMap gMap;
 
     public UUID mId;
 
@@ -21,6 +26,8 @@ public class Issue {
         score = -1;
         description = "Please help us FixIt!";
         pic = null;
+        lat = 37.8710; //Default Memorial Stadium Lat
+        lon = -122.2508; //Default Memorial Stadium Lon
 
         mId = UUID.randomUUID();
     }
@@ -28,6 +35,7 @@ public class Issue {
 
 
     //Setter functions
+
     public void setName(String name) {
         this.name = name;
     }
@@ -40,8 +48,15 @@ public class Issue {
         this.description = description;
     }
 
-    public void setPic(Bitmap thePic) {
-        this.pic = thePic;
+    public void setPic(Bitmap thePic) { this.pic = thePic; }
+
+    public void setLatLon(double lat, double lon) {
+        this.lat = lat;
+        this.lon = lon;
+    }
+
+    public void setMap(GoogleMap gMap) {
+        this.gMap = gMap;
     }
 
     //Accessor functions
@@ -60,4 +75,9 @@ public class Issue {
     public Bitmap getPic() {
         return pic;
     }
+
+    public double getLat() { return lat; }
+
+    public double getLon() { return lon; }
+
 }

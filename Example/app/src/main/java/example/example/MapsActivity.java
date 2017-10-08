@@ -43,14 +43,14 @@ public class MapsActivity extends FragmentActivity implements
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        // Add markers in Berkeley and move the camera
         LatLng mem_stad = new LatLng(37.8710, -122.2508);
         LatLng dwinelle = new LatLng(37.8705, -122.2606);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng evans = new LatLng(37.8737,-122.2578);
         mMap.addMarker(new MarkerOptions().position(mem_stad).title("Marker in Memorial Stadium"));
         mMap.addMarker(new MarkerOptions().position(dwinelle).title("Marker in Dwinelle"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mem_stad));
+        mMap.addMarker(new MarkerOptions().position(evans).title("Marker in Evans"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mem_stad, 12.0f));
         mMap.setOnMarkerClickListener(this);
     }
 
