@@ -18,6 +18,7 @@ public class Issue {
     private double lat;
     private double lon;
     private GoogleMap gMap;
+    private boolean hasVoted;
 
     public UUID mId;
 
@@ -28,7 +29,7 @@ public class Issue {
         pic = null;
         lat = 37.8710; //Default Memorial Stadium Lat
         lon = -122.2508; //Default Memorial Stadium Lon
-
+        hasVoted = false;
         mId = UUID.randomUUID();
     }
 
@@ -79,5 +80,9 @@ public class Issue {
     public double getLat() { return lat; }
 
     public double getLon() { return lon; }
+
+    public void vote() {
+        this.hasVoted = true;
+    }
 
 }

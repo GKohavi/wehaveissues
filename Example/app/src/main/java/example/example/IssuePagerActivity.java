@@ -22,7 +22,7 @@ import java.util.UUID;
  * Created by aiflab on 10/7/17.
  */
 
-public class IssuePagerActivity extends FragmentActivity implements OnMapReadyCallback {
+public class IssuePagerActivity extends FragmentActivity {
     private ViewPager mViewPager;
     private ArrayList<Issue> mIssues;
 
@@ -32,10 +32,6 @@ public class IssuePagerActivity extends FragmentActivity implements OnMapReadyCa
         mViewPager = new ViewPager(this);
         mViewPager.setId(R.id.viewPager);
         setContentView(mViewPager);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map); //Find fragment by id?!?!?!?!
-        mapFragment.getMapAsync(this);*/
 
         mIssues = IssueList.get(this).getIssues();
 
@@ -80,16 +76,6 @@ public class IssuePagerActivity extends FragmentActivity implements OnMapReadyCa
                 mViewPager.setCurrentItem(i);
                 break;
             }
-        }
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        for (Issue mIssue : mIssues) {
-            mIssue.setMap(googleMap);
-            LatLng issueLatLng = new LatLng(mIssue.getLat(), mIssue.getLon());
-            googleMap.addMarker(new MarkerOptions().position(issueLatLng).title(mIssue.getName()));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(issueLatLng, 12.0f));
         }
     }
 }
