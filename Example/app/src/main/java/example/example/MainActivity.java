@@ -30,4 +30,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this,CreateIssueActivity.class));
     }
 
+    @OnClick(R.id.mapViewButton)
+    void openMapView() {
+        startActivity(new Intent(MainActivity.this,MapsActivity.class));
+    }
 }
