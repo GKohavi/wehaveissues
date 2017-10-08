@@ -72,8 +72,8 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
 
         //MapView
         // Gets the MapView from the XML layout and creates it
-        /*mMap = (MapView)v.findViewById(R.id.issueMapView);
-        mMap.onCreate(savedInstanceState);*/
+        mMap = (MapView)v.findViewById(R.id.issueMapView);
+        mMap.onCreate(savedInstanceState);
 
         // Gets to GoogleMap from the MapView and does initialization stuff
         /*SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
@@ -94,14 +94,14 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
             public void onClick(View v) {
                 mIssue.increaseScore();
                 Toast.makeText(getContext(), "You just upvoted this Issue!", Toast.LENGTH_SHORT).show();
-                upvoteCount.setText(String.valueOf(mIssue.getScore()));
+                upvoteCount.setText(String.valueOf((int)mIssue.getScore()));
 
             }
         });
 
         //Upvote Count
         upvoteCount = (TextView)v.findViewById(R.id.upvoteCount);
-        upvoteCount.setText(String.valueOf(mIssue.getScore()));
+        upvoteCount.setText(String.valueOf((int)mIssue.getScore()));
 
         return v;
     }

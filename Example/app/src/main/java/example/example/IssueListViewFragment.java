@@ -80,7 +80,7 @@ public class IssueListViewFragment extends ListFragment {
     }
 
     private void goToRuleView(int position) {
-        Toast.makeText(getActivity(),"Going to an Issue", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Loading Issue...", Toast.LENGTH_SHORT).show();
         Issue anIssue = ((IssueAdapter)getListAdapter()).getItem(position);
 
         Intent i = new Intent(getActivity(), IssuePagerActivity.class);

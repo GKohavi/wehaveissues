@@ -60,7 +60,7 @@ public class MapsActivity extends FragmentActivity implements
             mMap.addMarker(new MarkerOptions().position(temp).title(anIssue.getName()));
         }
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mem_stad, 12.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mem_stad, 13.0f));
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
     }

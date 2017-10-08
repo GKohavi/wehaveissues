@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants">
 
@@ -15,7 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="91dp"
             android:layout_weight="0.19"
-            android:text="Issue Name" />
+            android:text="Issue Name"
+            android:textAppearance="@color/colorPrimaryDark"
+            android:textSize="20dp"
+            />
 
         <ImageView
             android:layout_width="177dp"
@@ -26,4 +30,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
