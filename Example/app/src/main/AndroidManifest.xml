@@ -29,6 +29,23 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA_JC07CCnlafX1txw4cdIkYVx7hywnUnc" />
 
+        <activity android:name="example.example.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="example.example.IssueListViewActivity"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name="example.example.IssuePagerActivity"
+            android:label="@string/app_name">
+        </activity>
+
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
@@ -38,6 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
