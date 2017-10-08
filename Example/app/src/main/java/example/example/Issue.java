@@ -18,18 +18,16 @@ public class Issue {
     private double lat;
     private double lon;
     private GoogleMap gMap;
-    private boolean hasVoted;
 
     public UUID mId;
 
     public Issue() {
         name = "Blank Issue Name";
-        score = -1;
+        score = 0;
         description = "Blank Description";
         pic = null;
         lat = 37.8710; //Default Memorial Stadium Lat
         lon = -122.2508; //Default Memorial Stadium Lon
-        hasVoted = false;
         mId = UUID.randomUUID();
     }
 
@@ -65,7 +63,7 @@ public class Issue {
         return name;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
@@ -81,8 +79,9 @@ public class Issue {
 
     public double getLon() { return lon; }
 
-    public void vote() {
-        this.hasVoted = true;
+    // Other utility functions
+    public void increaseScore() {
+        score += 1;
     }
 
 }

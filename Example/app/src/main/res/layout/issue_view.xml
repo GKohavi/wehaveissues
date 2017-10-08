@@ -41,6 +41,16 @@
         android:padding="1dp"
         android:adjustViewBounds="true"
         android:background="@null"/>
+
+    <TextView
+        android:id="@+id/upvoteCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="Description"
+        android:layout_margin="20dp"
+        />
+
     <!--
         <com.google.android.gms.maps.MapView
             android:id="@+id/issueMapView"

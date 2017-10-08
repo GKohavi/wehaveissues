@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,6 +20,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.w3c.dom.Text;
 
 import java.util.UUID;
 
@@ -35,8 +38,8 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
     private TextView mDescription;
     private MapView mMap;
     private ImageButton upvote;
+    private TextView upvoteCount;
     private GoogleMap gMap;
-
 
     public IssueFragment() {
 
@@ -86,6 +89,20 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
         upvote = (ImageButton)v.findViewById(R.id.upvote);
         Drawable tempDrawable = getResources().getDrawable(R.drawable.wrench);
         upvote.setImageBitmap(((BitmapDrawable) tempDrawable).getBitmap());
+        upvote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIssue.increaseScore();
+                Toast.makeText(getContext(), "You just upvoted this Issue!", Toast.LENGTH_SHORT).show();
+                upvoteCount.setText(String.valueOf(mIssue.getScore()));
+
+            }
+        });
+
+        //Upvote Count
+        upvoteCount = (TextView)v.findViewById(R.id.upvoteCount);
+        upvoteCount.setText(String.valueOf(mIssue.getScore()));
+
         return v;
     }
 
