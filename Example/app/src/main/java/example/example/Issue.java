@@ -12,7 +12,7 @@ public class Issue {
     private String name;
     private int score;
     private String description;
-    private Bitmap[] pic;
+    private Bitmap pic;
 
     public UUID mId;
 
@@ -40,7 +40,7 @@ public class Issue {
         this.description = description;
     }
 
-    public void setPic(Bitmap[] thePic) {
+    public void setPic(Bitmap thePic) {
         this.pic = thePic;
     }
 
@@ -57,7 +57,7 @@ public class Issue {
         return description;
     }
 
-    public Bitmap[] getPic() {
+    public Bitmap getPic() {
         return pic;
     }
 }

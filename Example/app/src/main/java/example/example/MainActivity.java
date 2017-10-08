@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.addIssueButton)
     void openAddIssueActivity(){
         Toast.makeText(getApplication(), "Going to Add Issue Button", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(MainActivity.this,CreateIssueActivity.class));
     }
 
 }

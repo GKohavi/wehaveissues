@@ -47,6 +47,11 @@
         </activity>
 
         <activity
+            android:name=".CreateIssueActivity"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
             <intent-filter>
