@@ -1,7 +1,9 @@
 package example.example;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,21 +26,20 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
     private ImageButton mImageButton;
 
     public CreateIssueFragment() {
-
+        mIssue = new Issue();
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.create_issue, container, false);
 
         mTitleField = (EditText)v.findViewById(R.id.titleEditText);
-        mTitleField.setText(mIssue.getName());
+//        mTitleField.setText(mIssue.getName());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -57,7 +58,7 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
         });
 
         mDescriptionField = (EditText)v.findViewById(R.id.descriptionEditText);
-        mDescriptionField.setText(mIssue.getDescription());
+//        mDescriptionField.setText(mIssue.getDescription());
         mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,5 +94,25 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
 
     public void addImageClick(View v) {
         Toast.makeText(getActivity(),"Add Image Button Clicked", Toast.LENGTH_SHORT).show();
+        //TODO: Add Camera Capability Here
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 0);
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bitmap bitmap = (Bitmap) data.getExtras().get("data"); //<-- THis bitmap is the taken image
+        mIssue.setPic(bitmap);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mIssue.getPic() != null) {
+            mImageButton.setImageBitmap(mIssue.getPic());
+        }
     }
 }
