@@ -26,9 +26,9 @@ As we mentioned above, this project helped us learn more about the design proces
 
 ## What's next for FixIt
 An Issue’s Perspective
-     - Progress bar, fancier rating system
-     - Crowdfunding
+     -Progress bar, fancier rating system
+     -Crowdfunding
 A Finder’s Perspective
-     - Filter Issues, badges/incentive system
+     -Filter Issues, badges/incentive system
 A Fixer’s Perspective
-     - Filter Issues off scores, Trending Issues
+     -Filter Issues off scores, Trending Issues
