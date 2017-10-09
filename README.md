@@ -1,6 +1,9 @@
-## Fixit
+# FixIt
  Crowdsourcing app to identify and upvote issues in public spaces (e.g. broken street lamps) that need Fixing!
- 
+
+## Project team
+Gefen Kohavi, Rishi Veerapaneni, Janaki Vivrekar
+
 ## Inspiration
 
 As college students learning to be socially responsible global citizens, we realized that it's important for all community members to feel a sense of ownership, responsibility, and equal access toward shared public spaces. Often, our interactions with public spaces inspire us to take action to help others in the community by initiating improvements and bringing up issues that need fixing. However, these issues don't always get addressed efficiently, in a way that empowers citizens to continue feeling that sense of ownership, or sometimes even at all! So, we devised a way to help FixIt for them!
