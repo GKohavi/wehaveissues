@@ -17,13 +17,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.w3c.dom.Text;
-
-import java.util.UUID;
 
 /**
  * Created by aiflab on 10/7/17.
@@ -34,12 +29,10 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
 
     private Issue mIssue;
     private TextView mTitle;
-    private ImageView mImage;
     private TextView mDescription;
     private MapView mMap;
     private ImageButton upvote;
     private TextView upvoteCount;
-    private GoogleMap gMap;
 
     public IssueFragment() {
 
@@ -48,7 +41,8 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID issueId = (UUID)getArguments().getSerializable(EXTRA_ISSUE_ID);
+//        UUID issueId = (UUID)getArguments().getSerializable(EXTRA_ISSUE_ID);
+        String issueId = (String)getArguments().getSerializable(EXTRA_ISSUE_ID);
         mIssue = IssueList.get(getActivity()).getIssue(issueId);
     }
 
@@ -63,8 +57,8 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
 
         //Image
         ImageView mImage = (ImageView)v.findViewById(R.id.imageView);
-        if (mIssue.getPic() != null) {
-            mImage.setImageBitmap(mIssue.getPic());
+        if (mIssue.getBitmapPic() != null) {
+            mImage.setImageBitmap(mIssue.getBitmapPic());
         }
         //Description
         mDescription = (TextView)v.findViewById(R.id.descriptionTextView);
@@ -106,19 +100,25 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
         return v;
     }
 
-    public static IssueFragment newInstance(UUID issueId) {
+//    public static IssueFragment newInstance(UUID issueId) {
+//        Bundle args = new Bundle();
+//        args.putSerializable(EXTRA_ISSUE_ID, issueId);
+//
+//        IssueFragment fragment = new IssueFragment();
+//        fragment.setArguments(args);
+//
+//        return fragment;
+//    }
+    public static IssueFragment newInstance(String issueId) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_ISSUE_ID, issueId);
-
         IssueFragment fragment = new IssueFragment();
         fragment.setArguments(args);
-
         return fragment;
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mIssue.setMap(googleMap);
         LatLng issueLatLng = new LatLng(mIssue.getLat(), mIssue.getLon());
         googleMap.addMarker(new MarkerOptions().position(issueLatLng).title(mIssue.getName()));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(issueLatLng, 12.0f));

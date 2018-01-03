@@ -82,7 +82,7 @@ public class MapsActivity extends FragmentActivity implements
             }
         }
         Intent i = new Intent(this, IssuePagerActivity.class);
-        i.putExtra(IssueFragment.EXTRA_ISSUE_ID, theIssue.mId);
+        i.putExtra(IssueFragment.EXTRA_ISSUE_ID, theIssue.getMId());
         startActivity(i);
     }
 }

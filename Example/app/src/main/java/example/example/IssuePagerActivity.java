@@ -8,15 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Created by aiflab on 10/7/17.
@@ -41,7 +33,7 @@ public class IssuePagerActivity extends FragmentActivity {
             @Override
             public Fragment getItem(int position) {
                 Issue anIssue = mIssues.get(position);
-                return IssueFragment.newInstance(anIssue.mId);
+                return IssueFragment.newInstance(anIssue.getMId());
             }
 
             @Override
@@ -70,9 +62,10 @@ public class IssuePagerActivity extends FragmentActivity {
             }
         });
 
-        UUID issueId = (UUID)getIntent().getSerializableExtra(IssueFragment.EXTRA_ISSUE_ID);
+//        UUID issueId = (UUID)getIntent().getSerializableExtra(IssueFragment.EXTRA_ISSUE_ID);
+        String issueId = (String)getIntent().getSerializableExtra(IssueFragment.EXTRA_ISSUE_ID);
         for (int i = 0; i < mIssues.size(); i++) {
-            if (mIssues.get(i).mId.equals(issueId)) {
+            if (mIssues.get(i).getMId().equals(issueId)) {
                 mViewPager.setCurrentItem(i);
                 break;
             }

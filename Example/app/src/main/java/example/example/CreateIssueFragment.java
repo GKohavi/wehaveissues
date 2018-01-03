@@ -15,13 +15,19 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by aiflab on 10/7/17.
  */
 
 public class CreateIssueFragment extends Fragment implements View.OnClickListener{
+    private DatabaseReference mDatabase;
 
     private Issue mIssue;
     private EditText mTitleField;
@@ -40,6 +46,8 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         View v = inflater.inflate(R.layout.create_issue, container, false);
 
         mTitleField = (EditText)v.findViewById(R.id.titleEditText);
@@ -115,7 +123,7 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
             Toast.makeText(getActivity(),"Please name the issue", Toast.LENGTH_SHORT).show();
             return;
         }
-        else if (mIssue.getPic() == null) {
+        else if (mIssue.getStringPic() == null) {
             Toast.makeText(getActivity(),"Please upload a picture of the issue", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -128,8 +136,10 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
         ArrayList<Issue> theIssues = IssueList.get(getActivity()).getIssues();
         theIssues.add(mIssue);
 
+        updateDatabase();
+
         Intent i = new Intent(getActivity(), IssuePagerActivity.class);
-        i.putExtra(IssueFragment.EXTRA_ISSUE_ID, mIssue.mId);
+        i.putExtra(IssueFragment.EXTRA_ISSUE_ID, mIssue.getMId());
         startActivity(i);
         getActivity().finish();
     }
@@ -138,15 +148,39 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap) data.getExtras().get("data"); //<-- THis bitmap is the taken image
-        mIssue.setPic(bitmap);
-
+        mIssue.setStringPicWithBitmap(bitmap);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mIssue.getPic() != null) {
-            mImageButton.setImageBitmap(mIssue.getPic());
+        if (mIssue.getBitmapPic() != null) {
+            mImageButton.setImageBitmap(mIssue.getBitmapPic());
         }
+    }
+
+    private void updateDatabase() {
+//        mDatabase.child("allIssues").child()
+//        Toast.makeText(getActivity(),"Adding to database", Toast.LENGTH_SHORT).show();
+//        String key = mDatabase.push().getKey();
+//        Map<String, Object> issueValues = mIssue.issueToMap();
+//        Map<String, Object> childValues = new HashMap<>();
+//        childValues.put("/allIssues/"+key, issueValues);
+//
+//        mDatabase.updateChildren(childValues);
+
+        String key = mDatabase.push().getKey();
+        Map<String, Object> issueValues = mIssue.issueToMap();
+        Map<String, Object> childValues = new HashMap<>();
+        childValues.put("/allIssues/"+key, issueValues);
+        mDatabase.updateChildren(childValues);
+
+//        String key = mDatabase.push().getKey();
+//        DatabaseIssue tmp = new DatabaseIssue(key, "testing a description");
+//        tmp.setStringPicWithBitmap(mIssue.getBitmapPic());
+//        Map<String, Object> issueValues = tmp.toMap();
+//        Map<String, Object> childValues = new HashMap<>();
+//        childValues.put("/newIssues/"+key, issueValues);
+//        mDatabase.updateChildren(childValues);
     }
 }

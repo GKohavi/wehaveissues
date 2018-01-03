@@ -68,8 +68,8 @@ public class IssueListViewFragment extends ListFragment {
             });
 
             ImageView mImage = (ImageView)convertView.findViewById(R.id.listImageView);
-            if (anIssue.getPic() != null) {
-                mImage.setImageBitmap(anIssue.getPic());
+            if (anIssue.getBitmapPic() != null) {
+                mImage.setImageBitmap(anIssue.getBitmapPic());
             }
             return convertView;
         }
@@ -84,7 +84,7 @@ public class IssueListViewFragment extends ListFragment {
         Issue anIssue = ((IssueAdapter)getListAdapter()).getItem(position);
 
         Intent i = new Intent(getActivity(), IssuePagerActivity.class);
-        i.putExtra(IssueFragment.EXTRA_ISSUE_ID, anIssue.mId);
+        i.putExtra(IssueFragment.EXTRA_ISSUE_ID, anIssue.getMId());
         startActivity(i);
     }
 
