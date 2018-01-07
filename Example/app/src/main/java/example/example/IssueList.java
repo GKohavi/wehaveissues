@@ -8,7 +8,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ public class IssueList {
         mIssues = new ArrayList<>();
 
         getStartingIssues();
+//        Toast.makeText(appContext,"Loading Issues...", Toast.LENGTH_SHORT).show();
 
 //        createStartingIssues(appContext);
 
@@ -70,8 +70,23 @@ public class IssueList {
 
     private void getStartingIssues() {
         DatabaseReference aDatabase = FirebaseDatabase.getInstance().getReference();
-        Query myQuery = aDatabase.child("allIssues").orderByChild("key").limitToFirst(5);
-        myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//        Query myQuery = aDatabase.child("allIssues").orderByChild("key").limitToFirst(8);
+//        myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot aSnapshot: dataSnapshot.getChildren()) {
+//                    Issue anIssue = aSnapshot.getValue(Issue.class);
+//                    mIssues.add(anIssue);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+
+        aDatabase.child("allIssues").orderByKey().startAt("-L1x_rH-3D5SoWZoFRA7").limitToFirst(3).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot aSnapshot: dataSnapshot.getChildren()) {
