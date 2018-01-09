@@ -31,6 +31,7 @@ public class IssueList {
 //        DatabaseReference aDatabase = FirebaseDatabase.getInstance().getReference();
 //        for (Issue anIssue : mIssues) {
 //            String tempKey = aDatabase.push().getKey();
+//            anIssue.setMId(tempKey);
 //            Map<String, Object> tempChildValues = new HashMap<>();
 //            tempChildValues.put("/allIssues/"+tempKey, anIssue.issueToMap());
 //            aDatabase.updateChildren(tempChildValues);
@@ -51,14 +52,6 @@ public class IssueList {
         return mIssues;
     }
 
-//    public Issue getIssue(UUID id) {
-//        for (int i = 0; i < mIssues.size(); i++) {
-//            if (mIssues.get(i).mId.equals(id)) {
-//                return mIssues.get(i);
-//            }
-//        }
-//        return null;
-//    }
     public Issue getIssue(String id) {
         for (int i = 0; i < mIssues.size(); i++) {
             if (mIssues.get(i).getMId().equals(id)) {
@@ -70,23 +63,7 @@ public class IssueList {
 
     private void getStartingIssues() {
         DatabaseReference aDatabase = FirebaseDatabase.getInstance().getReference();
-//        Query myQuery = aDatabase.child("allIssues").orderByChild("key").limitToFirst(8);
-//        myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot aSnapshot: dataSnapshot.getChildren()) {
-//                    Issue anIssue = aSnapshot.getValue(Issue.class);
-//                    mIssues.add(anIssue);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
-        aDatabase.child("allIssues").orderByKey().startAt("-L1x_rH-3D5SoWZoFRA7").limitToFirst(3).addListenerForSingleValueEvent(new ValueEventListener() {
+        aDatabase.child("allIssues").orderByKey().startAt("-L2Hb9o2CzysaBUvp15v").limitToFirst(10).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot aSnapshot: dataSnapshot.getChildren()) {

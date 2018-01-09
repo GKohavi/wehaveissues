@@ -170,6 +170,7 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
 //        mDatabase.updateChildren(childValues);
 
         String key = mDatabase.push().getKey();
+        mIssue.setMId(key);
         Map<String, Object> issueValues = mIssue.issueToMap();
         Map<String, Object> childValues = new HashMap<>();
         childValues.put("/allIssues/"+key, issueValues);

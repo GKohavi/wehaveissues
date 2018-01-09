@@ -5,14 +5,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -20,25 +26,65 @@ import java.util.ArrayList;
  * Created by aiflab on 10/6/17.
  */
 
-public class IssueListViewFragment extends ListFragment implements AbsListView.OnScrollListener {
-    private ArrayList<Issue> theIssues;
+public class IssueListViewFragment extends ListFragment{
+    private ArrayList<Issue> mIssues;
     private int mPosititonSelected;
+    private IssueAdapter mAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getActivity().setTitle("Issue List");
-        theIssues = IssueList.get(getActivity()).getIssues();
+        mIssues = IssueList.get(getActivity()).getIssues();
 
-        IssueAdapter adapter = new IssueAdapter(theIssues);
-        setListAdapter(adapter);
+        mAdapter = new IssueAdapter(mIssues);
+        setListAdapter(mAdapter);
     }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getListView().setOnScrollListener(this);
+        getListView().setOnScrollListener(new InfiniteScroller() {
+            @Override
+            public boolean onLoadMore(int page, int totalItemsCount) {
+                Toast.makeText(getActivity(),String.valueOf(mIssues.size()), Toast.LENGTH_SHORT).show();
+//                DatabaseFunctions.loadMoreIssues(null, mIssues, 5);
+                int howManyToLoad = 5;
+                DatabaseReference aDatabaseRef = FirebaseDatabase.getInstance().getReference().child("allIssues");
+
+                String lastId = mIssues.get(mIssues.size()-1).getMId();
+                if (lastId.equals("")) {
+                    return false;
+                }
+                aDatabaseRef.orderByKey().startAt(lastId).limitToFirst(howManyToLoad+1).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        boolean firstOne = true;
+                        for (DataSnapshot aSnapshot: dataSnapshot.getChildren()) {
+                            if (firstOne) {
+                                firstOne = false;
+                                continue;
+                            }
+                            Issue anIssue = aSnapshot.getValue(Issue.class);
+                            mIssues.add(anIssue);
+                            mAdapter.notifyDataSetChanged();
+                            Log.d("debug", "Database: Adding stuff to list!!!");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                Toast.makeText(getActivity(),"load more stuff", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),String.valueOf(mIssues.size()), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -93,13 +139,20 @@ public class IssueListViewFragment extends ListFragment implements AbsListView.O
 
     //https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView
     //https://stackoverflow.com/questions/1080811/android-endless-list
-    @Override
-    public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-        Toast.makeText(getActivity(),"onScroll", Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+//        Toast.makeText(getActivity(),"onScroll", Toast.LENGTH_SHORT).show();
+//    }
+//
+//    @Override
+//    public void onScrollStateChanged(AbsListView absListView, int i) {
+//        Toast.makeText(getActivity(),"onScrollStateChanged", Toast.LENGTH_SHORT).show();
+//    }
+
 
     @Override
-    public void onScrollStateChanged(AbsListView absListView, int i) {
-        Toast.makeText(getActivity(),"onScrollStateChanged", Toast.LENGTH_SHORT).show();
+    public void onResume() {
+        super.onResume();
+        Log.d("debug", "Resuming list fragment!!!");
     }
 }

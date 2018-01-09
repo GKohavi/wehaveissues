@@ -30,7 +30,7 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
     private Issue mIssue;
     private TextView mTitle;
     private TextView mDescription;
-    private MapView mMap;
+    private MapView mMapView;
     private ImageButton upvote;
     private TextView upvoteCount;
 
@@ -66,8 +66,9 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
 
         //MapView
         // Gets the MapView from the XML layout and creates it
-        mMap = (MapView)v.findViewById(R.id.issueMapView);
-        mMap.onCreate(savedInstanceState);
+        mMapView = (MapView)v.findViewById(R.id.issueMapView);
+        mMapView.onCreate(savedInstanceState);
+        mMapView.getMapAsync(this);
 
         // Gets to GoogleMap from the MapView and does initialization stuff
         /*SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
@@ -122,7 +123,16 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
         LatLng issueLatLng = new LatLng(mIssue.getLat(), mIssue.getLon());
         googleMap.addMarker(new MarkerOptions().position(issueLatLng).title(mIssue.getName()));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(issueLatLng, 12.0f));
-        }
     }
+
+    //https://stackoverflow.com/questions/16536414/how-to-use-mapview-in-android-using-google-map-v2
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+}
+
+
 
 

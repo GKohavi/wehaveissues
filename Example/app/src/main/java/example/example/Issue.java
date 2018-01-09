@@ -6,7 +6,6 @@ import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
-import java.util.UUID;
 
 /**
  * Created by aiflab on 10/7/17.
@@ -25,8 +24,8 @@ public class Issue {
 
 
     public Issue() {
-        mId = UUID.randomUUID().toString();
-//        mId = null;
+//        mId = UUID.randomUUID().toString();
+        mId = "";
         name = "Blank Issue Name";
         score = 0;
         description = "Blank Description";
@@ -86,8 +85,9 @@ public class Issue {
     public double getLon() { return lon; }
 
     public void setStringPicWithBitmap(Bitmap aPic) {
-        stringPic = encodeBitmap(aPic).substring(0,20);
+        stringPic = encodeBitmap(aPic); //.substring(0,20);
     }
+
     public Bitmap getBitmapPic() {
         if (stringPic == null) {
             return null;
