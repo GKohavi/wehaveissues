@@ -3,35 +3,69 @@ package example.example;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends AppCompatActivity {
+    private Button mViewIssuesButton;
+    private Button mMapViewButton;
+    private Button mAddIssueButton;
+    private Button mUserProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+
+        mViewIssuesButton = (Button)findViewById(R.id.viewButton);
+        mViewIssuesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewIssuesClicked();
+            }
+        });
+
+        mMapViewButton = (Button)findViewById(R.id.mapViewButton);
+        mMapViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapViewClicked();
+            }
+        });
+
+        mAddIssueButton = (Button)findViewById(R.id.addIssueButton);
+        mAddIssueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addIssueClicked();
+            }
+        });
+
+        mUserProfile = (Button)findViewById(R.id.userProfileButton);
+        mUserProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userProfileClicked();
+            }
+        });
+
+
     }
 
-    @OnClick(R.id.viewButton)
-    void openViewActivity(){
-//        Toast.makeText(getApplication(), "HERERERE", Toast.LENGTH_SHORT).show();
+    private void viewIssuesClicked() {
         startActivity(new Intent(MainActivity.this,IssueListViewActivity.class));
     }
 
-    @OnClick(R.id.addIssueButton)
-    void openAddIssueActivity(){
-        Toast.makeText(getApplication(), "Going to Add Issue Button", Toast.LENGTH_SHORT).show();
+    private void mapViewClicked() {
+        startActivity(new Intent(MainActivity.this,MapsActivity.class));
+    }
+
+    private void addIssueClicked() {
         startActivity(new Intent(MainActivity.this,CreateIssueActivity.class));
     }
 
-    @OnClick(R.id.mapViewButton)
-    void openMapView() {
-        startActivity(new Intent(MainActivity.this,MapsActivity.class));
+    private void userProfileClicked() {
+        startActivity(new Intent(MainActivity.this,UserProfileActivity.class));
     }
 }

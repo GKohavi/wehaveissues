@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -24,13 +23,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * Created by aiflab on 10/7/17.
  */
 
-public class IssueFragment extends Fragment  implements OnMapReadyCallback {
+public class IssueFragment extends Fragment implements OnMapReadyCallback {
     public static final String EXTRA_ISSUE_ID = "com.example.aiflab.testfixit.issue_id";
 
     private Issue mIssue;
     private TextView mTitle;
     private TextView mDescription;
-    private MapView mMapView;
+    private CustomMapView mMapView;
     private ImageButton upvote;
     private TextView upvoteCount;
 
@@ -41,7 +40,6 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        UUID issueId = (UUID)getArguments().getSerializable(EXTRA_ISSUE_ID);
         String issueId = (String)getArguments().getSerializable(EXTRA_ISSUE_ID);
         mIssue = IssueList.get(getActivity()).getIssue(issueId);
     }
@@ -66,7 +64,7 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
 
         //MapView
         // Gets the MapView from the XML layout and creates it
-        mMapView = (MapView)v.findViewById(R.id.issueMapView);
+        mMapView = (CustomMapView)v.findViewById(R.id.issueMapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
 
@@ -101,15 +99,6 @@ public class IssueFragment extends Fragment  implements OnMapReadyCallback {
         return v;
     }
 
-//    public static IssueFragment newInstance(UUID issueId) {
-//        Bundle args = new Bundle();
-//        args.putSerializable(EXTRA_ISSUE_ID, issueId);
-//
-//        IssueFragment fragment = new IssueFragment();
-//        fragment.setArguments(args);
-//
-//        return fragment;
-//    }
     public static IssueFragment newInstance(String issueId) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_ISSUE_ID, issueId);
