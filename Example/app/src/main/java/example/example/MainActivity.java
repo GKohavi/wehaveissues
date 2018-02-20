@@ -8,6 +8,7 @@ import android.widget.Button;
 
 
 public class MainActivity extends AppCompatActivity {
+
     private Button mViewIssuesButton;
     private Button mMapViewButton;
     private Button mAddIssueButton;
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 userProfileClicked();
             }
         });
-
 
     }
 
