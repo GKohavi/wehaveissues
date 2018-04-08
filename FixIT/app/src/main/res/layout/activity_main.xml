@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    tools:context="app.fixit.gefenkohavi.fixit.MainActivity">
+    <!--android:background="@drawable/wallpaper"-->
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+        <!-- Layout for entire scrollview-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            >
+
+            <!-- Title -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/roundedcornerspadded"
+                android:layout_marginBottom="8dp"
+                android:elevation="4dp"
+
+                >
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Broken Street Light"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:fontFamily="sans-serif"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <!-- Main Image -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:layout_marginBottom="4dp"
+                android:elevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/MainImg"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/roundedimage"
+                            android:contentDescription="SadLamp"
+                            android:scaleType="fitStart"
+                            android:layout_gravity="start"
+                            app:srcCompat="@drawable/sadlamp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hello world"
+                            android:layout_alignBottom="@id/MainImg"
+                            android:layout_alignLeft="@+id/MainImg"
+                            android:layout_alignRight="@id/MainImg"
+                            android:gravity="center_horizontal"
+                            android:textSize="20dp"
+                            android:textColor="#FFFFFF"
+                            android:background="#906CB727"/>
+
+
+                    </RelativeLayout>
+                    <!--<FrameLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent">-->
+                        <!--<ImageView-->
+                            <!--android:layout_width="300dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:background="@drawable/roundedimage"-->
+                            <!--android:contentDescription="SadLamp"-->
+                            <!--android:scaleType="fitStart"-->
+                            <!--android:layout_gravity="start"-->
+                            <!--app:srcCompat="@drawable/sadlamp" />-->
+                    <!--</FrameLayout>-->
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="Icons2"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/icons2" />
+
+                    </FrameLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Created By: "/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:text="Yucci Berk Li"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="\t Posted on: "/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+                        android:text="Feb 30, 2018"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Description -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/roundedcornerspadded"
+
+                android:layout_marginBottom="8dp"
+                android:elevation="4dp"
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Description"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This is a problem. Not only are the students at this school  stressed, the lamp posts are stressed too. Be nice to the lamp posts, otherwise they might fall on you. Now I am just adding text to test the scroll functionality of this screen...I wonder if it works or not. Ok ok ok, I do know that I am rambling, while I want to make some scroll area, I know you're busy so I won't bother you anymore."
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+            <!-- Icons -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/roundedcorners"
+                android:layout_marginBottom="8dp"
+                android:elevation="4dp">
+                <ImageView
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="Icons"
+                    android:scaleType="fitStart"
+                    android:layout_gravity="center_horizontal"
+                    app:srcCompat="@drawable/icons" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/roundedcornerspadded"
+                android:elevation="4dp"
+                android:layout_marginBottom="8dp">
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:enabled="true"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
