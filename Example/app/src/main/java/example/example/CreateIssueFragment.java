@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,7 +39,7 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
     private ImageButton mImageButton;
     private Button mSubmitButton;
 
-    //private FusedLocationProviderClient mFusedLocationProviderClient;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
 
     public CreateIssueFragment() {
         mIssue = new Issue();
@@ -117,7 +118,7 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
     }
 
     public void addImageClick(View v) {
-        Toast.makeText(getActivity(),"Add Image Button Clicked", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(),"Add Image Button Clicked", Toast.LENGTH_SHORT).show();
         //TODO: Add Camera Capability Here
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -129,7 +130,7 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
             Toast.makeText(getActivity(),"Please name the issue", Toast.LENGTH_SHORT).show();
             return;
         }
-        else if (mIssue.getStringPic() == null) {
+        else if (mIssue.getBitmapPic() == null) {
             Toast.makeText(getActivity(),"Please upload a picture of the issue", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -137,12 +138,14 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
             Toast.makeText(getActivity(),"Please fill in a description", Toast.LENGTH_SHORT).show();
             return;
         }
+        //37.870017, -122.268612
+        mIssue.setLatLon(37.870017, -122.268612);
 
         getActivity().setTitle("Issue List");
         ArrayList<Issue> theIssues = IssueList.get(getActivity()).getIssues();
         theIssues.add(mIssue);
 
-        updateDatabase();
+//        updateDatabase();
 
         Intent i = new Intent(getActivity(), IssuePagerActivity.class);
         i.putExtra(IssueFragment.EXTRA_ISSUE_ID, mIssue.getMId());
@@ -153,7 +156,7 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap) data.getExtras().get("data"); //<-- THis bitmap is the taken image
+        Bitmap bitmap = (Bitmap) data.getExtras().get("data"); //<-- This bitmap is the taken image
         mIssue.setStringPicWithBitmap(bitmap);
     }
 
@@ -199,32 +202,7 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
 //        mDatabase.updateChildren(childValues);
     }
 
-    /*private getLocation() {
-        Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
-        locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                if (task.isSuccessful()) {
-                    // Set the map's camera position to the current location of the device.
-                    mLastKnownLocation = task.getResult();
-                    if (mLastKnownLocation == null) {
-                        Log.d(TAG, "Current location is null. Using defaults.");
-                        Log.e(TAG, "Exception: %s", task.getException());
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
-                        mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                    }
-                    else {
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                new LatLng(mLastKnownLocation.getLatitude(),
-                                        mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-                    }
-                } else {
-                    Log.d(TAG, "Current location is null. Using defaults.");
-                    Log.e(TAG, "Exception: %s", task.getException());
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
-                    mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                }
-            }
-        });
-    }*/
+    private void getLocation() {
+
+    }
 }

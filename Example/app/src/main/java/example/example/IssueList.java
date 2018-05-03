@@ -23,7 +23,9 @@ public class IssueList {
     private IssueList(Context appContext) {
         mIssues = new ArrayList<>();
 
-        getStartingIssues();
+        createStartingIssues(appContext);
+
+//        getStartingIssues();
 //        Toast.makeText(appContext,"Loading Issues...", Toast.LENGTH_SHORT).show();
 
 //        createStartingIssues(appContext);
@@ -86,6 +88,7 @@ public class IssueList {
         Drawable tempDrawable = appContext.getResources().getDrawable(R.drawable.broken_sidewalk);
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.873418, -122.265070); //Location of Li Ka Shing
+        tempIssue.setScore(23);
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -94,6 +97,7 @@ public class IssueList {
         tempDrawable = appContext.getResources().getDrawable(R.drawable.confusing_parking_signs);
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8682753,-122.2543885); //Location of Haste Street / People's Park
+        tempIssue.setScore(112);
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -102,6 +106,7 @@ public class IssueList {
         tempDrawable = appContext.getResources().getDrawable(R.drawable.broken_street_lights);
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8762932,-122.2589373); //Location of Le Roy and Ridge Road intersection
+        tempIssue.setScore(37);
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -110,6 +115,7 @@ public class IssueList {
         tempDrawable = appContext.getResources().getDrawable(R.drawable.graffiti);
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8706, -122.2547); // wurster
+        tempIssue.setScore(8);
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -118,6 +124,7 @@ public class IssueList {
         tempDrawable = appContext.getResources().getDrawable(R.drawable.broken_glass);
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8692459,-122.2616494); //Amazon store
+        tempIssue.setScore(64);
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -126,6 +133,7 @@ public class IssueList {
         tempDrawable = appContext.getResources().getDrawable(R.drawable.incomplete_trail_lining);
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8733785,-122.2589375); // Memorial Glade!
+        tempIssue.setScore(2);
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -134,6 +142,7 @@ public class IssueList {
         tempDrawable = appContext.getResources().getDrawable(R.drawable.ants);
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8752884,-122.2557182); // Foothill!
+        tempIssue.setScore(89);
         mIssues.add(tempIssue);
     }
 

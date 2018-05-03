@@ -14,12 +14,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 
 /**
@@ -46,51 +40,51 @@ public class IssueListViewFragment extends ListFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getListView().setOnScrollListener(new InfiniteScroller() {
-            @Override
-            public boolean onLoadMore(int page, int totalItemsCount) {
-                Toast.makeText(getActivity(),String.valueOf(mIssues.size()), Toast.LENGTH_SHORT).show();
-//                DatabaseFunctions.loadMoreIssues(null, mIssues, 5);
-                int howManyToLoad = 5;
-                DatabaseReference aDatabaseRef = FirebaseDatabase.getInstance().getReference().child("allIssues");
-
-                String lastId = mIssues.get(mIssues.size()-1).getMId();
-                if (lastId.equals("")) {
-                    return false;
-                }
-                aDatabaseRef.orderByKey().startAt(lastId).limitToFirst(howManyToLoad+1).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        boolean firstOne = true;
-                        for (DataSnapshot aSnapshot: dataSnapshot.getChildren()) {
-                            if (firstOne) {
-                                firstOne = false;
-                                continue;
-                            }
-                            Issue anIssue = aSnapshot.getValue(Issue.class);
-                            mIssues.add(anIssue);
-                            mAdapter.notifyDataSetChanged();
-                            Log.d("debug", "Database: Adding stuff to list!!!");
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-                Toast.makeText(getActivity(),"load more stuff", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity(),String.valueOf(mIssues.size()), Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
+//        getListView().setOnScrollListener(new InfiniteScroller() {
+//            @Override
+//            public boolean onLoadMore(int page, int totalItemsCount) {
+//                Toast.makeText(getActivity(),String.valueOf(mIssues.size()), Toast.LENGTH_SHORT).show();
+////                DatabaseFunctions.loadMoreIssues(null, mIssues, 5);
+//                int howManyToLoad = 5;
+//                DatabaseReference aDatabaseRef = FirebaseDatabase.getInstance().getReference().child("allIssues");
+//
+//                String lastId = mIssues.get(mIssues.size()-1).getMId();
+//                if (lastId.equals("")) {
+//                    return false;
+//                }
+//                aDatabaseRef.orderByKey().startAt(lastId).limitToFirst(howManyToLoad+1).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        boolean firstOne = true;
+//                        for (DataSnapshot aSnapshot: dataSnapshot.getChildren()) {
+//                            if (firstOne) {
+//                                firstOne = false;
+//                                continue;
+//                            }
+//                            Issue anIssue = aSnapshot.getValue(Issue.class);
+//                            mIssues.add(anIssue);
+//                            mAdapter.notifyDataSetChanged();
+//                            Log.d("debug", "Database: Adding stuff to list!!!");
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+//
+//                Toast.makeText(getActivity(),"load more stuff", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(),String.valueOf(mIssues.size()), Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+//        });
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Toast.makeText(getActivity(),"Issue List Clicked", Toast.LENGTH_SHORT).show();
-        goToRuleView(position);
+        goToIssueView(position);
     }
 
     private class IssueAdapter extends ArrayAdapter<Issue> {
@@ -124,10 +118,10 @@ public class IssueListViewFragment extends ListFragment{
     }
 
     private void titleClick(View v) {
-        goToRuleView(mPosititonSelected);
+        goToIssueView(mPosititonSelected);
     }
 
-    private void goToRuleView(int position) {
+    private void goToIssueView(int position) {
         Toast.makeText(getActivity(),"Loading Issue...", Toast.LENGTH_SHORT).show();
         Issue anIssue = ((IssueAdapter)getListAdapter()).getItem(position);
 

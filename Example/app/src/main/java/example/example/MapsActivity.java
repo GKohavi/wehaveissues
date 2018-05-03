@@ -80,12 +80,12 @@ public class MapsActivity extends FragmentActivity implements
      * we just add a marker near Sydney, Australia.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
+     * installed Google Play services and return-ed to the app.
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setInfoWindowAdapter(new InfoWindow(getApplicationContext())); //Special
+//        mMap.setInfoWindowAdapter(new InfoWindow(getApplicationContext())); //Special
 
         // Add markers in Berkeley and move the camera
         LatLng mem_stad = new LatLng(37.8710, -122.2508);

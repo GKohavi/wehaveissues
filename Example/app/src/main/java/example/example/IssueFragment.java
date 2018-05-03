@@ -85,10 +85,10 @@ public class IssueFragment extends Fragment implements OnMapReadyCallback {
         upvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIssue.increaseScore();
-                Toast.makeText(getContext(), "You just upvoted this Issue!", Toast.LENGTH_SHORT).show();
-                upvoteCount.setText(String.valueOf((int)mIssue.getScore()));
-
+                clickedUpVote();
+//                mIssue.increaseScore();
+//                Toast.makeText(getContext(), "You just upvoted this Issue!", Toast.LENGTH_SHORT).show();
+//                upvoteCount.setText(String.valueOf((int)mIssue.getScore()));
             }
         });
 
@@ -105,6 +105,18 @@ public class IssueFragment extends Fragment implements OnMapReadyCallback {
         IssueFragment fragment = new IssueFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void clickedUpVote() {
+        if (!mIssue.getHasVoted()) {
+            mIssue.setHasVoted(true);
+            mIssue.increaseScore();
+            Toast.makeText(getContext(), "You just upvoted this Issue!", Toast.LENGTH_SHORT).show();
+            upvoteCount.setText(String.valueOf((int)mIssue.getScore()));
+        }
+        else {
+            Toast.makeText(getContext(), "You already voted on this Issue!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

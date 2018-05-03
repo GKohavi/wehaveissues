@@ -6,6 +6,7 @@ import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Created by aiflab on 10/7/17.
@@ -19,19 +20,23 @@ public class Issue {
     private int score;
     private String description;
     private String stringPic;
+    private Bitmap bitMapPic;
     private double lat;
     private double lon;
+    private boolean hasVoted;
 
 
     public Issue() {
-//        mId = UUID.randomUUID().toString();
-        mId = "";
+        mId = UUID.randomUUID().toString();
+//        mId = "";
         name = "Blank Issue Name";
+//        name = Resources.getSystem().getString(R.string.initial_title);
         score = 0;
         description = "Blank Description";
         stringPic = null;
         lat = 37.8710; //Default Memorial Stadium Lat
         lon = -122.2508; //Default Memorial Stadium Lon
+        hasVoted = false;
     }
 
 
@@ -85,18 +90,28 @@ public class Issue {
     public double getLon() { return lon; }
 
     public void setStringPicWithBitmap(Bitmap aPic) {
-        stringPic = encodeBitmap(aPic); //.substring(0,20);
+//        stringPic = encodeBitmap(aPic); //.substring(0,20);
+        bitMapPic = aPic;
     }
 
     public Bitmap getBitmapPic() {
-        if (stringPic == null) {
-            return null;
-        }
-        Bitmap ans = decodeStringPic(stringPic);
-        if (ans == null) {
-//            Do something here!
-        }
+        Bitmap ans = bitMapPic;
+//        if (stringPic == null) {
+//            return null;
+//        }
+//        Bitmap ans = decodeStringPic(stringPic);
+//        if (ans == null) {
+////            Do something here!
+//        }
         return ans;
+    }
+
+    public boolean getHasVoted() {
+        return hasVoted;
+    }
+
+    public void setHasVoted(boolean hasVoted) {
+        this.hasVoted = hasVoted;
     }
 
     // Other utility functions

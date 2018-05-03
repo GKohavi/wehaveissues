@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/initial_title"
+        android:hint="Issue Name"
         android:ems="10"
         android:id="@+id/titleEditText" />
 
@@ -22,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="@string/initial_description"
         android:ems="10"
+        android:hint="Description"
         android:id="@+id/descriptionEditText" />
 
     <Button
