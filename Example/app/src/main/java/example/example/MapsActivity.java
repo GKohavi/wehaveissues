@@ -12,9 +12,6 @@ import android.util.Log;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.GeoDataClient;
-import com.google.android.gms.location.places.PlaceDetectionClient;
-import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -39,8 +36,6 @@ public class MapsActivity extends FragmentActivity implements
 
     ////////NEW STUFF
     private CameraPosition mCameraPosition;
-    private GeoDataClient mGeoDataClient;
-    private PlaceDetectionClient mPlaceDetectionClient;
 
     // The entry point to the Fused Location Provider.
     private final LatLng mDefaultLocation = new LatLng(37.8737,-122.2578);
@@ -63,10 +58,6 @@ public class MapsActivity extends FragmentActivity implements
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
-        mGeoDataClient = Places.getGeoDataClient(this, null);
-
-        // Construct a PlaceDetectionClient.
-        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -94,6 +85,7 @@ public class MapsActivity extends FragmentActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setInfoWindowAdapter(new InfoWindow(getApplicationContext())); //Special
 
         // Add markers in Berkeley and move the camera
         LatLng mem_stad = new LatLng(37.8710, -122.2508);
@@ -103,8 +95,10 @@ public class MapsActivity extends FragmentActivity implements
 //        mMap.addMarker(new MarkerOptions().position(dwinelle).title("Marker in Dwinelle"));
 //        mMap.addMarker(new MarkerOptions().position(evans).title("Marker in Evans"));
         for (Issue anIssue : mIssues) {
-            LatLng temp = new LatLng(anIssue.getLat(), anIssue.getLon());
-            mMap.addMarker(new MarkerOptions().position(temp).title(anIssue.getName()));
+            LatLng tempLoc = new LatLng(anIssue.getLat(), anIssue.getLon());
+            mMap.addMarker(new MarkerOptions().position(tempLoc).title(anIssue.getName()));
+//            MarkerOptions tempMarkOp = new MarkerOptions().position(tempLoc);
+//            Marker tempMarker = new Marker();
         }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mem_stad, 13.0f));

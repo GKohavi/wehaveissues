@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +28,8 @@ import java.util.Map;
  * Created by aiflab on 10/7/17.
  */
 
-public class CreateIssueFragment extends Fragment implements View.OnClickListener{
+public class CreateIssueFragment extends Fragment implements View.OnClickListener {
+    private StorageReference mStorage;
     private DatabaseReference mDatabase;
 
     private Issue mIssue;
@@ -34,6 +37,8 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
     private EditText mDescriptionField;
     private ImageButton mImageButton;
     private Button mSubmitButton;
+
+    //private FusedLocationProviderClient mFusedLocationProviderClient;
 
     public CreateIssueFragment() {
         mIssue = new Issue();
@@ -46,6 +51,7 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mStorage = FirebaseStorage.getInstance().getReference().child("issue_images/");
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         View v = inflater.inflate(R.layout.create_issue, container, false);
@@ -159,6 +165,14 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
         }
     }
 
+    private void updateStorage() {
+        String key = mDatabase.push().getKey();
+        mIssue.setMId(key);
+        Map<String, Object> issueValues = mIssue.issueToMap();
+        Map<String, Object> childValues = new HashMap<>();
+        childValues.put("/allIssues/"+key, issueValues);
+    }
+
     private void updateDatabase() {
 //        mDatabase.child("allIssues").child()
 //        Toast.makeText(getActivity(),"Adding to database", Toast.LENGTH_SHORT).show();
@@ -184,4 +198,33 @@ public class CreateIssueFragment extends Fragment implements View.OnClickListene
 //        childValues.put("/newIssues/"+key, issueValues);
 //        mDatabase.updateChildren(childValues);
     }
+
+    /*private getLocation() {
+        Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
+        locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                if (task.isSuccessful()) {
+                    // Set the map's camera position to the current location of the device.
+                    mLastKnownLocation = task.getResult();
+                    if (mLastKnownLocation == null) {
+                        Log.d(TAG, "Current location is null. Using defaults.");
+                        Log.e(TAG, "Exception: %s", task.getException());
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                    }
+                    else {
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                new LatLng(mLastKnownLocation.getLatitude(),
+                                        mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                    }
+                } else {
+                    Log.d(TAG, "Current location is null. Using defaults.");
+                    Log.e(TAG, "Exception: %s", task.getException());
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                    mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                }
+            }
+        });
+    }*/
 }
