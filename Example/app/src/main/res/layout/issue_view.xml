@@ -17,7 +17,6 @@
             android:text="Issue Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@color/colorPrimaryDark"
             android:textSize="30dp"
             android:textAlignment="center"
             android:id="@+id/titleTextView"

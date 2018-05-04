@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,18 @@ public class IssueFragment extends Fragment implements OnMapReadyCallback {
     private ImageButton upvote;
     private TextView upvoteCount;
 
+    private TextView txt_help_gest;
+    private TextView help_title_gest;
+    private LinearLayout hidden_metrics;
+
+    private ImageButton danger_button;
+    private ImageButton accessibility_button;
+    private ImageButton blight_button;
+
+    private TextView danger_vote;
+    private TextView accessibility_vote;
+    private TextView blight_vote;
+
     public IssueFragment() {
 
     }
@@ -47,7 +60,89 @@ public class IssueFragment extends Fragment implements OnMapReadyCallback {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.issue_view, container, false);
+        View v = inflater.inflate(R.layout.issue_view_with_metrics, container, false);
+
+        //Special stuff
+        help_title_gest = (TextView)v.findViewById(R.id.help_title_gest);
+        help_title_gest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText(getContext(), "Blah!", Toast.LENGTH_SHORT).show();
+                hidden_metrics.setVisibility( hidden_metrics.isShown()
+                        ? View.GONE
+                        : View.VISIBLE );
+                danger_button.setImageResource(R.drawable.danger);
+                accessibility_button.setImageResource(R.drawable.accessibility_image);
+                blight_button.setImageResource(R.drawable.natue_icon);
+            }
+        });
+
+        hidden_metrics = (LinearLayout)v.findViewById(R.id.hidden_metrics);
+        hidden_metrics.setVisibility(View.GONE);
+
+        danger_vote = (TextView)v.findViewById(R.id.danger_vote);
+        danger_vote.setText(String.valueOf(mIssue.dangerScore));
+        danger_button = (ImageButton)v.findViewById(R.id.danger_button);
+        danger_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int tmp;
+                if (mIssue.dangerHasVoted) {
+                    tmp = -1;
+                }
+                else {
+                    tmp = 1;
+                }
+                mIssue.dangerScore += tmp;
+                mIssue.dangerHasVoted = !mIssue.dangerHasVoted;
+                danger_vote.setText(String.valueOf(mIssue.dangerScore));
+            }
+        });
+
+        accessibility_vote = (TextView)v.findViewById(R.id.accessibility_vote);
+        accessibility_vote.setText(String.valueOf(mIssue.acsScore));
+        accessibility_button = (ImageButton)v.findViewById(R.id.accessibility_button);
+        accessibility_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int tmp;
+                if (mIssue.acsHasVoted) {
+                    tmp = -1;
+                }
+                else {
+                    tmp = 1;
+                }
+                mIssue.acsScore += tmp;
+                mIssue.acsHasVoted = !mIssue.acsHasVoted;
+                accessibility_vote.setText(String.valueOf(mIssue.acsScore));
+            }
+        });
+
+        blight_vote = (TextView)v.findViewById(R.id.blight_vote);
+        blight_vote.setText(String.valueOf(mIssue.blightScore));
+        blight_button = (ImageButton)v.findViewById(R.id.blight_button);
+        blight_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int tmp;
+                if (mIssue.blightHasVoted) {
+                    tmp = -1;
+                }
+                else {
+                    tmp = 1;
+                }
+                mIssue.blightScore += tmp;
+                mIssue.blightHasVoted = !mIssue.blightHasVoted;
+                blight_vote.setText(String.valueOf(mIssue.blightScore));
+            }
+        });
+
+
+//        txt_help_gest = (TextView)v.findViewById(R.id.txt_help_gest);
+//        txt_help_gest.setVisibility(View.GONE);
+
+
+
 
         //Title
         mTitle = (TextView)v.findViewById(R.id.titleTextView);
@@ -115,7 +210,10 @@ public class IssueFragment extends Fragment implements OnMapReadyCallback {
             upvoteCount.setText(String.valueOf((int)mIssue.getScore()));
         }
         else {
-            Toast.makeText(getContext(), "You already voted on this Issue!", Toast.LENGTH_SHORT).show();
+            mIssue.setHasVoted(false);
+            mIssue.setScore(mIssue.getScore()-1);
+            Toast.makeText(getContext(), "You unvoted this Issue!", Toast.LENGTH_SHORT).show();
+            upvoteCount.setText(String.valueOf((int)mIssue.getScore()));
         }
     }
 

@@ -89,6 +89,9 @@ public class IssueList {
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.873418, -122.265070); //Location of Li Ka Shing
         tempIssue.setScore(23);
+        tempIssue.dangerScore = 8;
+        tempIssue.blightScore = 0;
+        tempIssue.acsScore = 21;
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -98,6 +101,9 @@ public class IssueList {
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8682753,-122.2543885); //Location of Haste Street / People's Park
         tempIssue.setScore(112);
+        tempIssue.dangerScore = 34;
+        tempIssue.blightScore = 11;
+        tempIssue.acsScore = 0;
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -107,6 +113,9 @@ public class IssueList {
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8762932,-122.2589373); //Location of Le Roy and Ridge Road intersection
         tempIssue.setScore(37);
+        tempIssue.dangerScore = 8;
+        tempIssue.blightScore = 0;
+        tempIssue.acsScore = 23;
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -116,6 +125,9 @@ public class IssueList {
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8706, -122.2547); // wurster
         tempIssue.setScore(8);
+        tempIssue.dangerScore = 0;
+        tempIssue.blightScore = 8;
+        tempIssue.acsScore = 0;
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -125,6 +137,9 @@ public class IssueList {
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8692459,-122.2616494); //Amazon store
         tempIssue.setScore(64);
+        tempIssue.dangerScore = 59;
+        tempIssue.blightScore = 53;
+        tempIssue.acsScore = 42;
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -134,6 +149,9 @@ public class IssueList {
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8733785,-122.2589375); // Memorial Glade!
         tempIssue.setScore(2);
+        tempIssue.dangerScore = 0;
+        tempIssue.blightScore = 0;
+        tempIssue.acsScore = 1;
         mIssues.add(tempIssue);
 
         tempIssue = new Issue();
@@ -143,6 +161,9 @@ public class IssueList {
         tempIssue.setStringPicWithBitmap(((BitmapDrawable) tempDrawable).getBitmap());
         tempIssue.setLatLon(37.8752884,-122.2557182); // Foothill!
         tempIssue.setScore(89);
+        tempIssue.dangerScore = 4;
+        tempIssue.blightScore = 13;
+        tempIssue.acsScore = 0;
         mIssues.add(tempIssue);
     }
 

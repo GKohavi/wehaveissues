@@ -25,6 +25,13 @@ public class Issue {
     private double lon;
     private boolean hasVoted;
 
+    int blightScore;
+    boolean blightHasVoted;
+    int acsScore;
+    boolean acsHasVoted;
+    int dangerScore;
+    boolean dangerHasVoted;
+
 
     public Issue() {
         mId = UUID.randomUUID().toString();
@@ -77,7 +84,7 @@ public class Issue {
     public String getName() {
         return name;
     }
-    public double getScore() {
+    public int getScore() {
         return score;
     }
     public String getDescription() {

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:text="Issue Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:id="@+id/titleTextView"
+            android:layout_margin="20dp"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/imageView"
+            android:layout_margin="20dp"
+            />
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="20dp"
+            android:layout_margin="20dp"
+            />
+
+        <ImageButton
+            android:id="@+id/upvote"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/wrench"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:padding="1dp"
+            android:adjustViewBounds="true"
+            android:background="@null"/>
+
+        <TextView
+            android:id="@+id/upvoteCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="20dp"
+            />
+
+        <!--
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/issueMapView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="40dp"
+            />
+            -->
+        <TextView android:id="@+id/help_title_gest"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Issue Metrics"
+            android:clickable="true"
+            />
+        <!--content to hide/show -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/hidden_metrics"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/danger_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/danger" />
+
+                <TextView
+                    android:id="@+id/danger_vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/accessibility_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/danger" />
+
+                <TextView
+                    android:id="@+id/accessibility_vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/blight_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/danger" />
+
+                <TextView
+                    android:id="@+id/blight_vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="5" />
+            </LinearLayout>
+
+            <!--<TextView-->
+                <!--android:id="@+id/txt_help_gest"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="blah blah" />-->
+            <!--<TextView-->
+                <!--android:id="@+id/txt_help_gest2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Hey hey hey!" />-->
+        </LinearLayout>
+
+        <example.example.CustomMapView
+            android:id="@+id/issueMapView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="40dp"
+            />
+    </LinearLayout>
+</ScrollView>
